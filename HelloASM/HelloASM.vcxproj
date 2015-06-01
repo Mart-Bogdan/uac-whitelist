@@ -61,6 +61,20 @@
       <GenerateMapFile>true</GenerateMapFile>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
+    <MASM>
+      <GeneratePreprocessedSourceListing>
+      </GeneratePreprocessedSourceListing>
+    </MASM>
+    <MASM>
+      <ListAllAvailableInformation>
+      </ListAllAvailableInformation>
+    </MASM>
+    <MASM>
+      <EnableAssemblyGeneratedCodeListing>
+      </EnableAssemblyGeneratedCodeListing>
+      <AssembledCodeListingFile>
+      </AssembledCodeListingFile>
+    </MASM>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -80,7 +94,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <MASM Include="memory.asm" />
     <MASM Include="Source.asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="memory.inc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

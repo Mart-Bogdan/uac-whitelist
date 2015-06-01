@@ -6,6 +6,8 @@ include ..\include\user32.inc
 include ..\include\kernel32.inc 
 ;includelib /masm32/lib/user32.lib
 ;includelib /masm32/lib/kernel32.lib
+include memory.inc
+
 WinMain proto :DWORD,:DWORD,:DWORD,:DWORD
 
 .DATA                     ; initialized data 
@@ -17,7 +19,7 @@ hInstance HINSTANCE ?        ; Instance handle of our program
 CommandLine LPSTR ? 
 .CODE                ; Here begins our code 
 start: 
-int 3
+;int 3
 invoke GetModuleHandle, NULL            ; get the instance handle of our program. 
                                                                        ; Under Win32, hmodule==hinstance mov hInstance,eax 
 mov hInstance,eax 
@@ -31,6 +33,14 @@ WinMain proc hInst:HINSTANCE,hPrevInst:HINSTANCE,CmdLine:LPSTR,CmdShow:DWORD
     LOCAL wc:WNDCLASSEX                                            ; create local variables on stack 
     LOCAL msg:MSG 
     LOCAL hwnd:HWND
+    LOCAL tmp:HWND
+
+	INVOKE AllocateMemory, 5
+	mov tmp,eax
+	INVOKE AllocateMemory, 5
+	INVOKE ReAllocateMemory, eax,6
+	mov tmp,eax
+	INVOKE DeAllocateMemory, eax
 
     mov   wc.cbSize,SIZEOF WNDCLASSEX                   ; fill values in members of wc 
     mov   wc.style, CS_HREDRAW or CS_VREDRAW 
